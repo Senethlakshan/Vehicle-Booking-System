@@ -1,0 +1,830 @@
+databaseChangeLog:
+  - preConditions:
+      - runningAs:
+          username: root
+  - changeSet:
+      id: 00000000000000
+      author: wndilshani
+      changes:
+
+        - createTable:
+            tableName: user
+            columns:
+              - column:
+                  name: id
+                  type: BIGINT
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: first_name
+                  type: VARCHAR(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: last_name
+                  type: VARCHAR(255)
+              - column:
+                  name: email
+                  type: VARCHAR(255)
+                  constraints:
+                    nullable: false
+                    unique: true
+              - column:
+                  name: password
+                  type: VARCHAR(10000)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: designation_id
+                  type: INT
+                  constraints:
+                    nullable: true
+              - column:
+                  name: image_url
+                  type: TEXT
+              - column:
+                  name: enabled
+                  type: TINYINT
+              - column:
+                  name: role_id
+                  type: INT
+                  constraints:
+                    nullable: false
+              - column:
+                  name: is_activated
+                  type: TINYINT
+              - column:
+                  name: otp
+                  type: VARCHAR(6)
+              - column:
+                  name: is_otp_sent
+                  type: TINYINT
+                  defaultValueBoolean: false
+              - column:
+                  name: is_admin_renewed
+                  type: TINYINT
+              - column:
+                  name: password_expire_date
+                  type: DATETIME
+              - column:
+                  name: otp_expire_date
+                  type: DATETIME
+              - column:
+                  name: created_by
+                  type: BIGINT
+                  constraints:
+                    nullable: true
+                    foreignKeyName: fk_user_created_by
+                    referencedColumnNames: id
+                    referencedTableName: user
+                    deleteCascade: true
+              - column:
+                  name: last_modified_by
+                  type: BIGINT
+                  constraints:
+                    foreignKeyName: fk_user_last_modified_by
+                    referencedColumnNames: id
+                    referencedTableName: user
+                    deleteCascade: true
+              - column:
+                  name: created_datetime
+                  type: DATETIME
+                  defaultValueComputed: CURRENT_TIMESTAMP
+              - column:
+                  name: last_modified_datetime
+                  type: DATETIME
+                  defaultValueComputed: CURRENT_TIMESTAMP
+
+        - loadData:
+            file: "classpath:db/data/sys_user_data.csv"
+            tableName: user
+            separator: ";"
+
+        - createTable:
+            tableName: role
+            columns:
+              - column:
+                  name: id
+                  type: INT
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: authority
+                  type: VARCHAR(50)
+                  constraints:
+                    nullable: false
+                    unique: true
+              - column:
+                  name: created_by
+                  type: BIGINT
+                  constraints:
+                    nullable: false
+                    foreignKeyName: fk_role_created_by
+                    referencedColumnNames: id
+                    referencedTableName: user
+              - column:
+                  name: last_modified_by
+                  type: BIGINT
+                  constraints:
+                    foreignKeyName: fk_role_last_modified_by
+                    referencedColumnNames: id
+                    referencedTableName: user
+              - column:
+                  name: created_datetime
+                  type: DATETIME
+                  value: CURRENT_TIMESTAMP
+              - column:
+                  name: last_modified_datetime
+                  type: DATETIME
+                  value: CURRENT_TIMESTAMP
+
+        - createTable:
+            tableName: designation
+            columns:
+              - column:
+                  name: id
+                  type: INT
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: name
+                  type: VARCHAR(2000)
+              - column:
+                  name: created_by
+                  type: BIGINT
+                  constraints:
+                    nullable: false
+                    foreignKeyName: fk_designation_created_by
+                    referencedColumnNames: id
+                    referencedTableName: user
+              - column:
+                  name: last_modified_by
+                  type: BIGINT
+                  constraints:
+                    foreignKeyName: fk_designation_last_modified_by
+                    referencedColumnNames: id
+                    referencedTableName: user
+              - column:
+                  name: created_datetime
+                  type: DATETIME
+              - column:
+                  name: last_modified_datetime
+                  type: DATETIME
+
+        - createTable:
+            tableName: category
+            columns:
+              - column:
+                  name: id
+                  type: INT
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: name
+                  type: VARCHAR(255)
+                  constraints:
+                    nullable: false
+                    unique: true
+              - column:
+                  name: created_by
+                  type: BIGINT
+                  constraints:
+                    nullable: false
+                    foreignKeyName: fk_category_created_by
+                    referencedColumnNames: id
+                    referencedTableName: user
+              - column:
+                  name: last_modified_by
+                  type: BIGINT
+                  constraints:
+                    foreignKeyName: fk_category_last_modified_by
+                    referencedColumnNames: id
+                    referencedTableName: user
+              - column:
+                  name: created_datetime
+                  type: DATETIME
+              - column:
+                  name: last_modified_datetime
+                  type: DATETIME
+
+        - createTable:
+            tableName: subcategory
+            columns:
+              - column:
+                  name: id
+                  type: INT
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: name
+                  type: VARCHAR(200)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: category_id
+                  type: INT
+                  constraints:
+                    nullable: false
+                    foreignKeyName: fk_subcategory_category
+                    referencedColumnNames: id
+                    referencedTableName: category
+              - column:
+                  name: created_by
+                  type: BIGINT
+                  constraints:
+                    nullable: false
+                    foreignKeyName: fk_subcategory_created_by
+                    referencedColumnNames: id
+                    referencedTableName: user
+              - column:
+                  name: last_modified_by
+                  type: BIGINT
+                  constraints:
+                    foreignKeyName: fk_subcategory_last_modified_by
+                    referencedColumnNames: id
+                    referencedTableName: user
+              - column:
+                  name: created_datetime
+                  type: DATETIME
+              - column:
+                  name: last_modified_datetime
+                  type: DATETIME
+
+        - createTable:
+            tableName: item
+            columns:
+              - column:
+                  name: id
+                  type: BIGINT
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: description
+                  type: TEXT
+              - column:
+                  name: image_url
+                  type: TEXT
+                  constraints:
+                    nullable: false
+              - column:
+                  name: name
+                  type: VARCHAR(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: price
+                  type: INT
+                  constraints:
+                    nullable: true
+              - column:
+                  name: is_sold
+                  type: TINYINT
+                  constraints:
+                    nullable: false
+              - column:
+                  name: subcategory_id
+                  type: INT
+                  constraints:
+                    nullable: false
+                    foreignKeyName: fk_item_subcategory
+                    referencedColumnNames: id
+                    referencedTableName: subcategory
+              - column:
+                  name: created_by
+                  type: BIGINT
+                  constraints:
+                    nullable: false
+                    foreignKeyName: fk_item_created_by
+                    referencedColumnNames: id
+                    referencedTableName: user
+              - column:
+                  name: last_modified_by
+                  type: BIGINT
+                  constraints:
+                    foreignKeyName: fk_item_last_modified_by
+                    referencedColumnNames: id
+                    referencedTableName: user
+              - column:
+                  name: created_datetime
+                  type: DATETIME
+              - column:
+                  name: last_modified_datetime
+                  type: DATETIME
+
+        - createTable:
+            tableName: post
+            columns:
+              - column:
+                  name: id
+                  type: BIGINT
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: title
+                  type: VARCHAR(255)
+                  constraints:
+                    nullable: true
+              - column:
+                  name: description
+                  type: TEXT
+              - column:
+                  name: image_url
+                  type: TEXT
+              - column:
+                  name: saved_by
+                  type: BIGINT
+                  constraints:
+                    nullable: true
+                    foreignKeyName: fk_post_saved_by
+                    referencedColumnNames: id
+                    referencedTableName: user
+              - column:
+                  name: created_by
+                  type: BIGINT
+                  constraints:
+                    nullable: false
+                    foreignKeyName: fk_post_created_by
+                    referencedColumnNames: id
+                    referencedTableName: user
+              - column:
+                  name: last_modified_by
+                  type: BIGINT
+                  constraints:
+                    foreignKeyName: fk_post_last_modified_by
+                    referencedColumnNames: id
+                    referencedTableName: user
+              - column:
+                  name: created_datetime
+                  type: DATETIME
+              - column:
+                  name: last_modified_datetime
+                  type: DATETIME
+
+        - createTable:
+            tableName: comment
+            columns:
+              - column:
+                  name: id
+                  type: BIGINT
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: text
+                  type: VARCHAR(2000)
+              - column:
+                  name: post_id
+                  type: BIGINT
+                  constraints:
+                    nullable: false
+                    foreignKeyName: fk_comment_post
+                    referencedColumnNames: id
+                    referencedTableName: post
+              - column:
+                  name: created_by
+                  type: BIGINT
+                  constraints:
+                    nullable: false
+                    foreignKeyName: fk_comment_created_by
+                    referencedColumnNames: id
+                    referencedTableName: user
+              - column:
+                  name: last_modified_by
+                  type: BIGINT
+                  constraints:
+                    foreignKeyName: fk_comment_last_modified_by
+                    referencedColumnNames: id
+                    referencedTableName: user
+              - column:
+                  name: created_datetime
+                  type: DATETIME
+              - column:
+                  name: last_modified_datetime
+                  type: DATETIME
+
+        - createTable:
+            tableName: event
+            columns:
+              - column:
+                  name: id
+                  type: BIGINT
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: image_url
+                  type: TEXT
+                  constraints:
+                    nullable: false
+              - column:
+                  name: description
+                  type: TEXT
+              - column:
+                  name: title
+                  type: VARCHAR(1000)
+              - column:
+                  name: created_by
+                  type: BIGINT
+                  constraints:
+                    nullable: false
+                    foreignKeyName: fk_event_created_by
+                    referencedColumnNames: id
+                    referencedTableName: user
+              - column:
+                  name: last_modified_by
+                  type: BIGINT
+                  constraints:
+                    foreignKeyName: fk_event_last_modified_by
+                    referencedColumnNames: id
+                    referencedTableName: user
+              - column:
+                  name: created_datetime
+                  type: DATETIME
+              - column:
+                  name: last_modified_datetime
+                  type: DATETIME
+
+        - createTable:
+            tableName: notification
+            columns:
+              - column:
+                  name: id
+                  type: BIGINT
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+                  autoIncrement: true
+              - column:
+                  name: link
+                  type: TEXT
+              - column:
+                  name: is_read
+                  type: TINYINT
+              - column:
+                  name: created_by
+                  type: BIGINT
+                  constraints:
+                    nullable: false
+                    foreignKeyName: fk_notification_created_by
+                    referencedColumnNames: id
+                    referencedTableName: user
+              - column:
+                  name: last_modified_by
+                  type: BIGINT
+                  constraints:
+                    foreignKeyName: fk_notification_last_modified_by
+                    referencedColumnNames: id
+                    referencedTableName: user
+              - column:
+                  name: created_datetime
+                  type: DATETIME
+              - column:
+                  name: last_modified_datetime
+                  type: DATETIME
+
+        - createTable:
+            tableName: reaction
+            columns:
+              - column:
+                  name: id
+                  type: BIGINT
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: post_id
+                  type: BIGINT
+                  constraints:
+                    nullable: false
+                    foreignKeyName: fk_reaction_post
+                    referencedTableName: post
+                    referencedColumnNames: id
+              - column:
+                  name: created_by
+                  type: BIGINT
+                  constraints:
+                    nullable: false
+                    foreignKeyName: fk_reaction_created_by
+                    referencedColumnNames: id
+                    referencedTableName: user
+              - column:
+                  name: last_modified_by
+                  type: BIGINT
+                  constraints:
+                    foreignKeyName: fk_reaction_last_modified_by
+                    referencedColumnNames: id
+                    referencedTableName: user
+              - column:
+                  name: created_datetime
+                  type: DATETIME
+              - column:
+                  name: last_modified_datetime
+                  type: DATETIME
+
+        - createTable:
+            tableName: department
+            columns:
+              - column:
+                  name: id
+                  type: INT
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: name
+                  type: VARCHAR(100)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: created_by
+                  type: BIGINT
+                  constraints:
+                    nullable: false
+                    foreignKeyName: fk_department_created_by
+                    referencedColumnNames: id
+                    referencedTableName: user
+              - column:
+                  name: last_modified_by
+                  type: BIGINT
+                  constraints:
+                    foreignKeyName: fk_department_last_modified_by
+                    referencedColumnNames: id
+                    referencedTableName: user
+              - column:
+                  name: created_datetime
+                  type: DATETIME
+              - column:
+                  name: last_modified_datetime
+                  type: DATETIME
+
+
+        - createTable:
+            tableName: branch
+            columns:
+              - column:
+                  name: id
+                  type: INT
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+                  autoIncrement: true
+              - column:
+                  name: name
+                  type: VARCHAR(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: address
+                  type: VARCHAR(1000)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: created_by
+                  type: BIGINT
+                  constraints:
+                    nullable: false
+                    foreignKeyName: fk_branch_created_by
+                    referencedColumnNames: id
+                    referencedTableName: user
+              - column:
+                  name: last_modified_by
+                  type: BIGINT
+                  constraints:
+                    foreignKeyName: fk_branch_last_modified_by
+                    referencedColumnNames: id
+                    referencedTableName: user
+              - column:
+                  name: created_datetime
+                  type: DATETIME
+              - column:
+                  name: last_modified_datetime
+                  type: DATETIME
+
+        - createTable:
+            tableName: company
+            columns:
+              - column:
+                  name: id
+                  type: INT
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+                  autoIncrement: true
+              - column:
+                  name: name
+                  type: VARCHAR(300)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: address
+                  type: VARCHAR(1000)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: created_by
+                  type: BIGINT
+                  constraints:
+                    nullable: false
+                    foreignKeyName: fk_company_created_by
+                    referencedColumnNames: id
+                    referencedTableName: user
+              - column:
+                  name: last_modified_by
+                  type: BIGINT
+                  constraints:
+                    foreignKeyName: fk_company_last_modified_by
+                    referencedColumnNames: id
+                    referencedTableName: user
+              - column:
+                  name: created_datetime
+                  type: DATETIME
+              - column:
+                  name: last_modified_datetime
+                  type: DATETIME
+
+        - createTable:
+            tableName: department_designation
+            columns:
+              - column:
+                  name: department_id
+                  type: INT
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+                    foreignKeyName: fk_department_designation
+                    referencedColumnNames: id
+                    referencedTableName: department
+              - column:
+                  name: designation_id
+                  type: INT
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+                    foreignKeyName: fk_designation_department
+                    referencedColumnNames: id
+                    referencedTableName: designation
+
+        - createTable:
+            tableName: department_branch
+            columns:
+              - column:
+                  name: department_id
+                  type: INT
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+                    foreignKeyName: fk_department_branch
+                    referencedColumnNames: id
+                    referencedTableName: department
+              - column:
+                  name: branch_id
+                  type: INT
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+                    foreignKeyName: fk_branch_department
+                    referencedColumnNames: id
+                    referencedTableName: branch
+
+        - createTable:
+            tableName: branch_company
+            columns:
+              - column:
+                  name: branch_id
+                  type: INT
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+                    foreignKeyName: fk_branch_company
+                    referencedColumnNames: id
+                    referencedTableName: branch
+              - column:
+                  name: company_id
+                  type: INT
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+                    foreignKeyName: fk_company_branch
+                    referencedColumnNames: id
+                    referencedTableName: company
+
+        - createTable:
+            tableName: tag
+            columns:
+              - column:
+                  name: id
+                  type: INT
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: name
+                  type: VARCHAR(255)
+
+        - createTable:
+            tableName: item_tag
+            columns:
+              - column:
+                  name: item_id
+                  type: BIGINT
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+                    foreignKeyName: fk_item_tag
+                    referencedColumnNames: id
+                    referencedTableName: item
+              - column:
+                  name: tag_id
+                  type: INT
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+                    foreignKeyName: fk_tag_item
+                    referencedColumnNames: id
+                    referencedTableName: tag
+
+        - createTable:
+            tableName: event_department
+            columns:
+              - column:
+                  name: event_id
+                  type: BIGINT
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+                    foreignKeyName:  fk_event_department
+                    referencedColumnNames: id
+                    referencedTableName: event
+              - column:
+                  name: department_id
+                  type: INT
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+                    foreignKeyName: fk_department_event
+                    referencedColumnNames: id
+                    referencedTableName: department
+
+#        - sql:
+#            dbms: 'mysql'
+#            stripComments: true
+#            splitStatements: true
+#            sql: |
+#              CREATE TRIGGER role_before_insert
+#              BEFORE INSERT ON role
+#              FOR EACH ROW
+#              BEGIN
+#                IF NEW.created_datetime IS NULL OR NEW.created_datetime = '' THEN
+#                  SET NEW.created_datetime = CURRENT_TIMESTAMP;
+#                END IF;
+#                IF NEW.last_modified_datetime IS NULL OR NEW.last_modified_datetime = '' THEN
+#                  SET NEW.last_modified_datetime = CURRENT_TIMESTAMP;
+#                END IF;
+#              END;
+            
+
+
+        - loadData:
+            file: "classpath:db/data/initial_user_role_data.csv"
+            tableName: role
+            separator: ";"
+
+
+        - addForeignKeyConstraint:
+           baseColumnNames:  role_id
+           baseTableName:  user
+           constraintName:  fk_user_role
+           onDelete:  RESTRICT
+           onUpdate:  RESTRICT
+           referencedColumnNames:  id
+           referencedTableName:  role
+           validate:  true
+
+        - addForeignKeyConstraint:
+            baseColumnNames: designation_id
+            baseTableName: user
+            constraintName: fk_user_designation
+            onDelete: RESTRICT
+            onUpdate: RESTRICT
+            referencedColumnNames: id
+            referencedTableName: designation
+            validate: true
+
+

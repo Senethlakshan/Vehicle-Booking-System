@@ -1,0 +1,28 @@
+databaseChangeLog:
+  - changeSet:
+      id: 20240919041000_auto_designation.yaml
+      author: athiq
+      changes:
+        # Only modify and add auto-increment if the constraint doesn't exist
+        - modifyDataType:
+            tableName: designation
+            columnName: id
+            newDataType: int
+        - addAutoIncrement:
+            columnName: id
+            tableName: designation
+            columnDataType: int
+
+        # Conditionally add foreign key constraints if needed
+        - addForeignKeyConstraint:
+            constraintName: fk_designation_department
+            baseTableName: department_designation
+            baseColumnNames: designation_id
+            referencedTableName: designation
+            referencedColumnNames: id
+        - addForeignKeyConstraint:
+            constraintName: fk_user_designation
+            baseTableName: user
+            baseColumnNames: designation_id
+            referencedTableName: designation
+            referencedColumnNames: id

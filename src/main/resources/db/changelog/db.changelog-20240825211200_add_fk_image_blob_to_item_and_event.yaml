@@ -1,0 +1,20 @@
+databaseChangeLog:
+  - changeSet:
+      id: 20240825211200_add_fk_image_blob_to_item_and_event
+      author: wndilshani
+      changes:
+        - addForeignKeyConstraint:
+            baseTableName: event
+            baseColumnNames: image_blob
+            constraintName: fk_event_image_blob
+            referencedTableName: file_blob
+            referencedColumnNames: id
+            onDelete: CASCADE
+
+        - addForeignKeyConstraint:
+            baseTableName: item
+            baseColumnNames: image_blob
+            constraintName: fk_item_image_blob
+            referencedTableName: file_blob
+            referencedColumnNames: id
+            onDelete: CASCADE

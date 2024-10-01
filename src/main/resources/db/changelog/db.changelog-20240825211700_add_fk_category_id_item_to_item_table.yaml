@@ -1,0 +1,12 @@
+databaseChangeLog:
+  - changeSet:
+      id: 20240825211700_add_fk_category_id_item_to_item_table
+      author: wndilshani
+      changes:
+        - addForeignKeyConstraint:
+            baseTableName: item
+            baseColumnNames: category_id
+            constraintName: fk_item_category
+            referencedTableName: category
+            referencedColumnNames: id
+            onDelete: CASCADE
