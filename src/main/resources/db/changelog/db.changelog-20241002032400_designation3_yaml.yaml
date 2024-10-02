@@ -1,0 +1,35 @@
+databaseChangeLog:
+  - changeSet:
+      id: 20241002032400_designation3_yaml.yaml
+      author: athiq
+      changes:
+        # Step 1: Drop the foreign key constraint
+        - dropForeignKeyConstraint:
+            constraintName: fk_designation_department
+            baseTableName: department_designation
+
+        # Step 2: Modify the data type and set auto-increment
+        - modifyDataType:
+            tableName: designation
+            columnName: id
+            newDataType: int
+        - addAutoIncrement:
+            columnName: id
+            tableName: designation
+            columnDataType: int
+
+        # Step 3: Re-add the foreign key constraint
+        - addForeignKeyConstraint:
+            constraintName: fk_designation_department
+            baseTableName: department_designation
+            baseColumnNames: designation_id
+            referencedTableName: designation
+            referencedColumnNames: id
+
+        # Assuming the user foreign key is still needed
+        - addForeignKeyConstraint:
+            constraintName: fk_user_designation
+            baseTableName: user
+            baseColumnNames: designation_id
+            referencedTableName: designation
+            referencedColumnNames: id
