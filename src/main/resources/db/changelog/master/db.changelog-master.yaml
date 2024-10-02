@@ -53,9 +53,9 @@ databaseChangeLog:
 #      file: classpath:db/changelog/db.changelog-20240911020000_modify_designation_id.yaml
   - include:
       file: classpath:db/changelog/db.changelog-20240919011000_add_imageurl.yaml
-#  - include:
-#      file: classpath:db/changelog/db.changelog-20240919041000_auto_designation.yaml
+  - include:
+      file: classpath:db/changelog/db.changelog-20240919041000_auto_designation.yaml
 #  - include:
 #      file: classpath:db/changelog/db.changelog-20240924013000_auto_designation2.yaml
-  - include:
-      file: classpath:db/changelog/db.changelog-20241002032400_designation3_yaml.yaml
+#  - include:
+#      file: classpath:db/changelog/db.changelog-20241002032400_designation3_yaml.yaml
