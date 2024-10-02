@@ -1,24 +1,34 @@
 databaseChangeLog:
   - changeSet:
-      id: 20240924013000_auto_designation2.yaml
+      id: 20240924013001_drop_fk_designation_department
       author: athiq
       changes:
-        # Step 1: Attempt to drop the foreign key constraint, but it will not fail if it does not exist.
         - dropForeignKeyConstraint:
             constraintName: fk_designation_department
             baseTableName: department_designation
 
-        # Step 2: Modify the data type and set auto-increment for designation id
+  - changeSet:
+      id: 20240924013002_modify_designation_id_type
+      author: athiq
+      changes:
         - modifyDataType:
             tableName: designation
             columnName: id
             newDataType: int
+
+  - changeSet:
+      id: 20240924013003_add_auto_increment_designation_id
+      author: athiq
+      changes:
         - addAutoIncrement:
             columnName: id
             tableName: designation
             columnDataType: int
 
-        # Step 3: Re-add the foreign key constraint
+  - changeSet:
+      id: 20240924013004_add_fk_designation_department
+      author: athiq
+      changes:
         - addForeignKeyConstraint:
             constraintName: fk_designation_department
             baseTableName: department_designation
@@ -26,7 +36,10 @@ databaseChangeLog:
             referencedTableName: designation
             referencedColumnNames: id
 
-        # Step 4: Ensure the user foreign key is still added
+  - changeSet:
+      id: 20240924013005_add_fk_user_designation
+      author: athiq
+      changes:
         - addForeignKeyConstraint:
             constraintName: fk_user_designation
             baseTableName: user
