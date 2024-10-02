@@ -2,6 +2,10 @@ databaseChangeLog:
   - changeSet:
       id: 20241002032400_designation3_yaml.yaml
       author: athiq
+      preConditions:
+        - foreignKeyConstraintExists:
+            foreignKeyName: fk_designation_department
+            tableName: department_designation
       changes:
         # Step 1: Drop the foreign key constraint
         - dropForeignKeyConstraint:
