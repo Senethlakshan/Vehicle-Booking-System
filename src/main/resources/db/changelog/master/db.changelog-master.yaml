@@ -65,3 +65,5 @@ databaseChangeLog:
       file: classpath:db/changelog/db.changelog-20241003035200_modify_designation_id.yaml
   - include:
       file: classpath:db/changelog/db.changelog-20241003035500_recreate_user_designation_fk.yaml
+  - include:
+      file: classpath:db/changelog/db.changelog-20241007104300_addimage_des.yaml
