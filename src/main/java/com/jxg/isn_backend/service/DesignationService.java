@@ -12,9 +12,11 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.io.IOException;
+import java.io.InputStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
 import java.util.List;
 import java.util.Optional;
 
@@ -71,13 +73,16 @@ public class DesignationService {
 
 
             Path filePath = uploadPath.resolve(fileName);
-            Files.copy(file.getInputStream(), filePath);
 
-            // Generate file URL
+            try (InputStream inputStream = file.getInputStream()) {
+                Files.copy(inputStream, filePath, StandardCopyOption.REPLACE_EXISTING);
+            }
+
             String fileUrl = ServletUriComponentsBuilder.fromCurrentContextPath()
                     .path("/api/files/")
                     .path(fileName)
                     .toUriString();
+
 
             designation.setImageUrl(fileUrl);
             designationRepository.save(designation); // Save updated designation
