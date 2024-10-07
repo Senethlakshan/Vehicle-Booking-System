@@ -21,8 +21,6 @@ import java.util.Optional;
 @Service
 public class DesignationService {
 
-    private static final String UPLOAD_DIR = "uploads/designation";
-
     @Autowired
     private DesignationRepository designationRepository;
 
@@ -64,19 +62,20 @@ public class DesignationService {
         Designation designation = optionalDesignation.get();
 
         try {
-            // Save the file to the specified directory
             String fileName = System.currentTimeMillis() + "_" + file.getOriginalFilename();
-            Path uploadPath = Paths.get(UPLOAD_DIR);
+            String uploadDir = "uploads";
+            Path uploadPath = Paths.get(uploadDir);
             if (!Files.exists(uploadPath)) {
                 Files.createDirectories(uploadPath);
             }
+
 
             Path filePath = uploadPath.resolve(fileName);
             Files.copy(file.getInputStream(), filePath);
 
             // Generate file URL
             String fileUrl = ServletUriComponentsBuilder.fromCurrentContextPath()
-                    .path("/api/designation/images/")
+                    .path("/api/files/")
                     .path(fileName)
                     .toUriString();
 
