@@ -1,6 +1,6 @@
 databaseChangeLog:
   - changeSet:
-      id: 20241007104300_addimage_des.yaml
+      id: 20241007104300_addimage_des
       author: athiq
       changes:
         - addColumn:
