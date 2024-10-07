@@ -33,6 +33,8 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 import java.time.LocalDateTime;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Optional;
 
 @Service
@@ -285,6 +287,41 @@ public class UsersService {
     }
 
 
+//    public ResponseEntity<?> getLoggedInUserDesignation(String token) {
+//        try {
+//            // Extract JWT token from Authorization header
+//            String jwtToken = token.startsWith("Bearer ") ? token.substring(7) : token;
+//
+//            // Get email from JWT token
+//            String email = jwtUtils.getUserNameFromJwtToken(jwtToken);
+//
+//            // Fetch user by email
+//            Optional<User> optionalUser = userRepository.findByEmail(email);
+//            if (optionalUser.isEmpty()) {
+//                return ResponseEntity.status(HttpStatus.NOT_FOUND).body("User not found");
+//            }
+//
+//            User user = optionalUser.get();
+//
+//            // Fetch user's designation
+//            Designation designation = user.getDesignation();
+//            if (designation == null) {
+//                return ResponseEntity.status(HttpStatus.OK).body("No designation assigned");
+//            }
+//
+////            Map<String, Object> response = new HashMap<>();
+////            response.put("name", designation.getName());
+////            response.put("image_url", designation.getImageUrl());  // Assuming Designation has getImageUrl() method
+////
+//
+//            // Return the designation information
+//            return ResponseEntity.ok(designation.getName());
+//        } catch (Exception e) {
+//            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error fetching designation: " + e.getMessage());
+//        }
+//    }
+
+
     public ResponseEntity<?> getLoggedInUserDesignation(String token) {
         try {
             // Extract JWT token from Authorization header
@@ -307,12 +344,18 @@ public class UsersService {
                 return ResponseEntity.status(HttpStatus.OK).body("No designation assigned");
             }
 
-            // Return the designation information
-            return ResponseEntity.ok(designation.getName());
+            // Create response map to hold designation name and image_url
+            Map<String, Object> response = new HashMap<>();
+            response.put("name", designation.getName());
+            response.put("image_url", designation.getImageUrl());  // Assuming Designation has getImageUrl() method
+
+            // Return the designation information with image_url
+            return ResponseEntity.ok(response);
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error fetching designation: " + e.getMessage());
         }
     }
+
 
 }
 

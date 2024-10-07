@@ -37,10 +37,16 @@ public class AuthController {
         this.authService = authService;
     }
 
-    //remove
     private String getDesignationName(User user) {
         return user.getDesignation() != null ? user.getDesignation().getName() : "Unknown"; // or return null
     }
+
+    private String getDesignationUrl(User user) {
+        return user.getDesignation() != null ? user.getDesignation().getImageUrl() :"Unknown";
+    }
+
+
+
 
     @PostMapping("/signin")
     public ResponseEntity<?> authenticateUser(@RequestBody SignInRequestDTO loginRequest) {
@@ -69,7 +75,8 @@ public class AuthController {
                 user.getEmail(),
                 user.getImageUrl(),
                 user.getImageBlob(),
-                getDesignationName(user));  //remove
+                getDesignationName(user),
+                getDesignationUrl(user));
 
         return ResponseEntity.ok(new SignInResponseDTO(jwt, userMinDTO, userDetails.getAuthorities()));
     }

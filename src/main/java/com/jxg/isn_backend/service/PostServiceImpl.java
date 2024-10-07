@@ -359,7 +359,8 @@ public class PostServiceImpl implements PostService {
                 createdBy.getLastName(),
                 createdBy.getImageUrl(),
                 createdBy.getImageBlob(),
-                createdBy.getDesignation() != null ? createdBy.getDesignation().getName() : "Department Not Specified"
+                createdBy.getDesignation() != null ? createdBy.getDesignation().getName() : "Department Not Specified",
+                createdBy.getDesignation() != null ? createdBy.getDesignation().getImageUrl(): "Department Not Specified"
         );
 
         var updatedUserMinDTO = new UserMinDTO(
@@ -369,7 +370,8 @@ public class PostServiceImpl implements PostService {
                 lastModifiedBy.getLastName(),
                 lastModifiedBy.getImageUrl(),
                 lastModifiedBy.getImageBlob(),
-                lastModifiedBy.getDesignation() != null ? lastModifiedBy.getDesignation().getName() : "unknown"
+                lastModifiedBy.getDesignation() != null ? lastModifiedBy.getDesignation().getName() : "unknown",
+                lastModifiedBy.getDesignation() != null ? lastModifiedBy.getDesignation().getImageUrl():"unknown"
         );
 
         return new CreatePostResponseDTO(
@@ -519,7 +521,8 @@ public class PostServiceImpl implements PostService {
                 createdBy.getLastName(),
                 createdBy.getImageUrl(),
                 createdBy.getImageBlob(),
-                createdBy.getDesignation() != null ? createdBy.getDesignation().getName() : "Department Not Specified"
+                createdBy.getDesignation() != null ? createdBy.getDesignation().getName() : "Department Not Specified",
+                createdBy.getDesignation() != null ? createdBy.getDesignation().getImageUrl(): "Department Not Specified"
         );
 
         return new GetWallPostsResponseDTO(

@@ -37,6 +37,12 @@ public class UserService {
         return user.getDesignation() != null ? user.getDesignation().getName() : "Department Not Specified"; // or return null
     }
 
+    private String getDesignationUrl(User user){
+        return user.getDesignation() !=null ? user.getDesignation().getImageUrl():  "Department Not Specified";
+    }
+
+
+
     public Set<UserMinDTO> getUsers() {
 
         List<User> users = this.userRepository.findAll();
@@ -51,7 +57,8 @@ public class UserService {
                     user.getLastName(),
                     user.getImageUrl(),
                     user.getImageBlob(),
-                    getDesignationName(user)
+                    getDesignationName(user),
+                    getDesignationUrl(user)
 
             ));
         }
@@ -72,7 +79,8 @@ public class UserService {
                         user.getLastName(),
                         user.getImageUrl(),
                         user.getImageBlob(),
-                        getDesignationName(user)
+                        getDesignationName(user),
+                        getDesignationUrl(user)
 
                 ));
     }
@@ -86,7 +94,9 @@ public class UserService {
                         user.getLastName(),
                         user.getImageUrl(),
                         user.getImageBlob(),
-                        getDesignationName(user)
+                        getDesignationName(user),
+                        getDesignationUrl(user)
+
                 ));
     }
 
@@ -136,7 +146,9 @@ public class UserService {
                         user.getLastName(),
                         user.getImageUrl(),
                         user.getImageBlob(),
-                        getDesignationName(user)
+                        getDesignationName(user),
+                        getDesignationUrl(user)
+
                 ))
                 .collect(Collectors.toList());
     }

@@ -9,8 +9,7 @@ public record UserMinDTO(
         String lastName,
         String imageUrl,
         FileBlob imageBlob,
-        String designation
-
-        //remove designation here for error free, in user mapper, and in userService
+        String designation,
+        String designationUrl
 ) {
 }
