@@ -1,0 +1,13 @@
+databaseChangeLog:
+  - changeSet:
+      id: addimage_des.yaml
+      author: athiq
+      changes:
+        - addColumn:
+            tableName: designation
+            columns:
+              - column:
+                  name: image_url
+                  type: varchar(255)
+                  constraints:
+                    nullable: true
