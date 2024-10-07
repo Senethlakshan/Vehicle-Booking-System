@@ -5,9 +5,14 @@ import com.jxg.isn_backend.service.DesignationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.http.HttpStatus;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
+
 
 @RestController
 @CrossOrigin
@@ -52,6 +57,13 @@ public class DesignationController {
             return ResponseEntity.notFound().build();
         }
     }
+
+    @PutMapping("/{id}/uploadImage")
+    public ResponseEntity<String> uploadImageForDesignation(@PathVariable Integer id,
+                                                            @RequestParam("file") MultipartFile file) {
+        return designationService.uploadImageForDesignation(id, file);
+    }
+
 }
 
 

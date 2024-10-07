@@ -19,6 +19,8 @@ public class Designation extends AbstractAuditable {
 
     private String name;
 
+    private String imageUrl;
+
     @JsonIgnore
 //    @OneToMany(mappedBy = "designation")
     @OneToMany(mappedBy = "designation", fetch = FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval = true)
