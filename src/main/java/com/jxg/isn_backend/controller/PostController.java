@@ -125,8 +125,8 @@ public PostController(PostService postService, AuthService authService) {
                 currentUser.getImageUrl(),
                 currentUser.getImageBlob(),
                 currentUser.getDesignation().getName(),
-                currentUser.getDesignation().getImageUrl()
-
+                currentUser.getDesignation().getImageUrl(),
+                currentUser.getRole().getAuthority().name()
         );
 
         // Return the updated post information with the user who updated it

@@ -13,6 +13,8 @@ public record GetWallPostsResponseDTO(
         String firstName,
         String lastName,
         String designation,
+        String designationUrl,
+        String Role,
         String title,
         String description,
         @JsonProperty("blobs")

@@ -2,6 +2,7 @@ package com.jxg.isn_backend.mapper;
 
 import com.jxg.isn_backend.dto.auth.UserMinDTO;
 import com.jxg.isn_backend.model.Designation;
+import com.jxg.isn_backend.model.Role;
 import com.jxg.isn_backend.model.User;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
@@ -21,6 +22,7 @@ public interface UserMapper {
     @Mapping(target = "imageBlob", source = "imageBlob")
     @Mapping(target = "designation", source = "designation", qualifiedByName = "mapDesignationToString")
     @Mapping(target = "designationUrl", source = "designation", qualifiedByName = "mapDesignationUrl") // Map designation URL
+    @Mapping(target = "role", source = "role", qualifiedByName = "mapRoleToString") // Map role to string
     UserMinDTO toUserMinDTO(User user);
 
 
@@ -33,5 +35,10 @@ public interface UserMapper {
     @Named("mapDesignationUrl")
     default String mapDesignationUrl(Designation designation) {
         return designation != null ? designation.getImageUrl() : null;
+    }
+
+    @Named("mapRoleToString")
+    default String mapRoleToString(Role role) {
+        return role != null ? role.getAuthority().name() : null; // Get role as string
     }
 }

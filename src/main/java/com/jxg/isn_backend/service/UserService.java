@@ -41,6 +41,9 @@ public class UserService {
         return user.getDesignation() !=null ? user.getDesignation().getImageUrl():  "Department Not Specified";
     }
 
+    private String getRole(User user) {
+        return user.getRole() != null ? user.getRole().getAuthority().name() : "Unknown"; // Returns the role as a string
+    }
 
 
     public Set<UserMinDTO> getUsers() {
@@ -58,7 +61,8 @@ public class UserService {
                     user.getImageUrl(),
                     user.getImageBlob(),
                     getDesignationName(user),
-                    getDesignationUrl(user)
+                    getDesignationUrl(user),
+                    getRole(user)
 
             ));
         }
@@ -80,7 +84,8 @@ public class UserService {
                         user.getImageUrl(),
                         user.getImageBlob(),
                         getDesignationName(user),
-                        getDesignationUrl(user)
+                        getDesignationUrl(user),
+                        getRole(user)
 
                 ));
     }
@@ -95,7 +100,8 @@ public class UserService {
                         user.getImageUrl(),
                         user.getImageBlob(),
                         getDesignationName(user),
-                        getDesignationUrl(user)
+                        getDesignationUrl(user),
+                        getRole(user)
 
                 ));
     }
@@ -147,7 +153,8 @@ public class UserService {
                         user.getImageUrl(),
                         user.getImageBlob(),
                         getDesignationName(user),
-                        getDesignationUrl(user)
+                        getDesignationUrl(user),
+                        getRole(user)
 
                 ))
                 .collect(Collectors.toList());

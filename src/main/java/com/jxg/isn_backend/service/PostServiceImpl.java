@@ -360,7 +360,8 @@ public class PostServiceImpl implements PostService {
                 createdBy.getImageUrl(),
                 createdBy.getImageBlob(),
                 createdBy.getDesignation() != null ? createdBy.getDesignation().getName() : "Department Not Specified",
-                createdBy.getDesignation() != null ? createdBy.getDesignation().getImageUrl(): "Department Not Specified"
+                createdBy.getDesignation() != null ? createdBy.getDesignation().getImageUrl(): "Department Not Specified",
+                createdBy.getRole() != null ? createdBy.getRole().getAuthority().name() : "No Role"
         );
 
         var updatedUserMinDTO = new UserMinDTO(
@@ -371,7 +372,8 @@ public class PostServiceImpl implements PostService {
                 lastModifiedBy.getImageUrl(),
                 lastModifiedBy.getImageBlob(),
                 lastModifiedBy.getDesignation() != null ? lastModifiedBy.getDesignation().getName() : "unknown",
-                lastModifiedBy.getDesignation() != null ? lastModifiedBy.getDesignation().getImageUrl():"unknown"
+                lastModifiedBy.getDesignation() != null ? lastModifiedBy.getDesignation().getImageUrl():"unknown",
+                lastModifiedBy.getRole() != null ? lastModifiedBy.getRole().getAuthority().name() : "No Role" // Add this line
         );
 
         return new CreatePostResponseDTO(
@@ -399,6 +401,8 @@ public class PostServiceImpl implements PostService {
                     post.getCreatedBy().getFirstName(),
                     post.getCreatedBy().getLastName(),
                     post.getCreatedBy().getDesignation() != null ? post.getCreatedBy().getDesignation().getName() : "Department Not Specified",
+                    post.getCreatedBy().getDesignation() !=null ? post.getCreatedBy().getDesignation().getImageUrl(): "Department Not Specified",
+                    post.getCreatedBy().getRole() !=null ? post.getCreatedBy().getRole().getAuthority().name() : "Role not specified",
                     post.getTitle(),
                     post.getDescription(),
                     post.getFileBlobs() != null ? post.getFileBlobs().stream().map(BlobMapper.INSTANCE::toDto).collect(Collectors.toSet()) : new HashSet<>(),
@@ -435,6 +439,8 @@ public class PostServiceImpl implements PostService {
                     post.getCreatedBy().getFirstName(),
                     post.getCreatedBy().getLastName(),
                     post.getCreatedBy().getDesignation() != null ? post.getCreatedBy().getDesignation().getName() : "Department Not Specified",
+                    post.getCreatedBy().getDesignation() != null ? post.getCreatedBy().getDesignation().getImageUrl() : "Department Not Specified",
+                    post.getCreatedBy().getRole() !=null ? post.getCreatedBy().getRole().getAuthority().name() : "Role not specified",
                     post.getTitle(),
                     post.getDescription(),
                     post.getFileBlobs() != null ? post.getFileBlobs().stream().map(BlobMapper.INSTANCE::toDto).collect(Collectors.toSet()) : new HashSet<>(),
@@ -464,6 +470,8 @@ public class PostServiceImpl implements PostService {
                     post.getCreatedBy().getFirstName(),
                     post.getCreatedBy().getLastName(),
                     post.getCreatedBy().getDesignation() != null ? post.getCreatedBy().getDesignation().getName() : "Department Not Specified",
+                    post.getCreatedBy().getDesignation() !=null ? post.getCreatedBy().getDesignation().getImageUrl():"Department not specified",
+                    post.getCreatedBy().getRole() !=null ? post.getCreatedBy().getRole().getAuthority().name() : "Role not specified",
                     post.getTitle(),
                     post.getDescription(),
                     post.getFileBlobs() != null ? post.getFileBlobs().stream().map(BlobMapper.INSTANCE::toDto).collect(Collectors.toSet()) : new HashSet<>(),
@@ -522,7 +530,8 @@ public class PostServiceImpl implements PostService {
                 createdBy.getImageUrl(),
                 createdBy.getImageBlob(),
                 createdBy.getDesignation() != null ? createdBy.getDesignation().getName() : "Department Not Specified",
-                createdBy.getDesignation() != null ? createdBy.getDesignation().getImageUrl(): "Department Not Specified"
+                createdBy.getDesignation() != null ? createdBy.getDesignation().getImageUrl(): "Department Not Specified",
+                createdBy.getRole() != null ? createdBy.getRole().getAuthority().name() : "No Role" // Add this line
         );
 
         return new GetWallPostsResponseDTO(
@@ -533,6 +542,8 @@ public class PostServiceImpl implements PostService {
                 createdBy.getFirstName(),
                 createdBy.getLastName(),
                 createdBy.getDesignation() != null ? createdBy.getDesignation().getName() : "Department Not Specified",
+                createdBy.getDesignation() != null ? createdBy.getDesignation().getImageUrl() : "Department Not Specified",
+                createdBy.getRole() !=null ? createdBy.getRole().getAuthority().name() : "Role not specified",
                 post.getTitle(),
                 post.getDescription(),
                 post.getFileBlobs() != null ? post.getFileBlobs().stream().map(BlobMapper.INSTANCE::toDto).collect(Collectors.toSet()) : new HashSet<>(),

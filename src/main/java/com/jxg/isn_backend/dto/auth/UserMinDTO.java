@@ -10,6 +10,7 @@ public record UserMinDTO(
         String imageUrl,
         FileBlob imageBlob,
         String designation,
-        String designationUrl
+        String designationUrl,
+        String role
 ) {
 }

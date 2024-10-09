@@ -45,6 +45,13 @@ public class AuthController {
         return user.getDesignation() != null ? user.getDesignation().getImageUrl() :"Unknown";
     }
 
+    private String getRole(User user) {
+        return user.getRole() != null ? user.getRole().getAuthority().name() : "Unknown"; // Get role as string
+    }
+
+//    private Integer getRoleID(User user) {
+//        return user.getRole() != null ? user.getRole().getAuthority(). : 0;
+//    }
 
 
 
@@ -76,7 +83,8 @@ public class AuthController {
                 user.getImageUrl(),
                 user.getImageBlob(),
                 getDesignationName(user),
-                getDesignationUrl(user));
+                getDesignationUrl(user),
+                getRole(user));
 
         return ResponseEntity.ok(new SignInResponseDTO(jwt, userMinDTO, userDetails.getAuthorities()));
     }
