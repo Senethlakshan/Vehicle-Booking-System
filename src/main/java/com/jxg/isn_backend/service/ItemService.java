@@ -232,5 +232,39 @@ public class ItemService {
         return itemResponseDTOs;
     }
 
+    public ItemResponseDTO updateNameAndDescription(Long id, String name, String description) {
+        // Fetch the item
+        Item item = itemRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Item not found"));
+
+        // Update fields if provided
+        if (name != null) {
+            item.setName(name);
+        }
+        if (description != null) {
+            item.setDescription(description);
+        }
+
+        // Save the updated item
+        Item updatedItem = itemRepository.save(item);
+
+        // Return the response DTO
+        return new ItemResponseDTO(
+                updatedItem.getId(),
+                updatedItem.getDescription(),
+                updatedItem.getName(),
+                updatedItem.getIsSold(),
+                updatedItem.getTags(),
+                BlobMapper.INSTANCE.toDto(updatedItem.getImageBlob()),
+                updatedItem.getSubcategory(),
+                updatedItem.getCategory(),
+                UserMapper.INSTANCE.toUserMinDTO(updatedItem.getCreatedBy()),
+                UserMapper.INSTANCE.toUserMinDTO(updatedItem.getLastModifiedBy()),
+                updatedItem.getCreatedDatetime(),
+                updatedItem.getLastModifiedDatetime()
+        );
+    }
+
+
 }
 

@@ -15,6 +15,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 @RestController
@@ -117,5 +118,26 @@ public ResponseEntity<List<ItemResponseDTO>> getItemsBySubcategoryId(@PathVariab
 
         return ResponseEntity.ok(userItems);
     }
+
+    @PutMapping("/{id}/namedesc")
+    public ResponseEntity<ItemResponseDTO> updateItemNameAndDescription(
+            @PathVariable Long id,
+            @RequestBody Map<String, String> updates) {
+
+        // Validate input
+        if (!updates.containsKey("name") && !updates.containsKey("description")) {
+            return ResponseEntity.badRequest().build();
+        }
+
+        // Update the item
+        ItemResponseDTO updatedItem = itemService.updateNameAndDescription(
+                id,
+                updates.get("name"),
+                updates.get("description")
+        );
+
+        return ResponseEntity.ok(updatedItem);
+    }
+
 }
 
