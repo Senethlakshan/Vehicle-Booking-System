@@ -1,0 +1,8 @@
+databaseChangeLog:
+  - changeSet:
+      id: "drop_fk_designation_department"
+      author: "athiq"
+      changes:
+        - dropForeignKeyConstraint:
+            baseTableName: "department_designation"
+            constraintName: "fk_designation_department"
