@@ -1,6 +1,7 @@
 package com.jxg.isn_backend.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -22,6 +23,7 @@ public class Designation extends AbstractAuditable {
     private String imageUrl;
 
     @JsonIgnore
+//    @JsonIgnoreProperties("designation")
 //    @OneToMany(mappedBy = "designation")
     @OneToMany(mappedBy = "designation", fetch = FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<User> users;

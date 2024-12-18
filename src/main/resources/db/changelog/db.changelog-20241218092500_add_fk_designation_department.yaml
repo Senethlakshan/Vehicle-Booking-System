@@ -1,0 +1,11 @@
+databaseChangeLog:
+  - changeSet:
+      id: 20241218092500_add_fk_designation_department
+      author: athiq
+      changes:
+        - addForeignKeyConstraint:
+            baseTableName: department_designation
+            baseColumnNames: designation_id
+            constraintName: fk_designation_department
+            referencedTableName: designation
+            referencedColumnNames: id

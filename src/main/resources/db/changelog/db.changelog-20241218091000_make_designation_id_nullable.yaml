@@ -1,0 +1,9 @@
+databaseChangeLog:
+  - changeSet:
+      id: 20241218091000_make_designation_id_nullable
+      author: athiq
+      changes:
+        - dropNotNullConstraint:
+            tableName: user
+            columnName: designation_id
+            columnDataType: int

@@ -59,15 +59,25 @@ databaseChangeLog:
 #      file: classpath:db/changelog/db.changelog-20240924013000_auto_designation2.yaml
 #  - include:
 #      file: classpath:db/changelog/db.changelog-20241002032400_designation3_yaml.yaml
-  - include:
-      file: classpath:db/changelog/db.changelog-20241003035200_drop_user_designation_fk.yaml
-  - include:
-      file: classpath:db/changelog/db.changelog-20241003035200_modify_designation_id.yaml
-  - include:
-      file: classpath:db/changelog/db.changelog-20241003035500_recreate_user_designation_fk.yaml
+#  - include:
+#      file: classpath:db/changelog/db.changelog-20241003035200_drop_user_designation_fk.yaml
+#  - include:
+#      file: classpath:db/changelog/db.changelog-20241003035200_modify_designation_id.yaml
+#  - include:
+#      file: classpath:db/changelog/db.changelog-20241003035500_recreate_user_designation_fk.yaml
   - include:
       file: classpath:db/changelog/db.changelog-20241007104300_addimage_des.yaml
+#  - include:
+#      file: classpath:db/changelog/db.changelog-20241210091000_modify_designation_id_and_foreign_key.yaml
   - include:
-      file: classpath:db/changelog/db.changelog-20241210091000_modify_designation_id_and_foreign_key.yaml
+      file: classpath:db/changelog/db.changelog-20241218090900_drop_fk.yaml
   - include:
-      file: classpath:db/changelog/db.changelog-20241217091000_modify_designation_id.yaml
+      file: classpath:db/changelog/db.changelog-20241218090901_drop_fk_user_designation.yaml
+  - include:
+      file: classpath:db/changelog/db.changelog-20241218091000_auto_increment_des.yaml
+  - include:
+      file: classpath:db/changelog/db.changelog-20241218091000_make_designation_id_nullable.yaml
+  - include:
+      file: classpath:db/changelog/db.changelog-20241218092500_add_fk_designation_department.yaml
+  - include:
+      file: classpath:db/changelog/db.changelog-20241218092501_add_fk_user_designation.yaml

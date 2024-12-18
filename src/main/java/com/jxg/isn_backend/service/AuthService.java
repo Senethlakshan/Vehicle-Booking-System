@@ -42,6 +42,9 @@ public class AuthService {
 
     public User signup(SignUpRequestDTO signUpRequest) {
 
+        // Ensure email is not modified unintentionally
+        String email = signUpRequest.email();
+        System.out.println("Received email: " + email); // Log to verify
 
         if (userRepository.existsByEmail(signUpRequest.email())) {
             throw new BadRequestException("Email isn't available. \n Contact support");
