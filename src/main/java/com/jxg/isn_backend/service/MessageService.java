@@ -137,12 +137,12 @@ public class MessageService {
         message.setItemId(itemId);
 
         if (postId != null) {
-            String postUrl = "http://localhost:5173/home/posts/" + postId;
+            String postUrl = " " + postId;
             message.setContent(content + " [View Post]" + " - "+postUrl +"  ");
         }
 
         if (itemId != null) {
-            String itemUrl = "http://localhost:5173/home/markets/" + itemId;
+            String itemUrl = " " + itemId;
             message.setContent(content + " [View Item]" + " - "+itemUrl +"  ");
         }
         return messageRepository.save(message);

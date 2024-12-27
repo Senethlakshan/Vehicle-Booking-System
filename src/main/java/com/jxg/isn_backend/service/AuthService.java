@@ -166,7 +166,7 @@ public class AuthService {
         userRepository.save(user);
 
 
-        String resetUrl = "http://localhost:5173/reset-password?token="+resetToken;
+        String resetUrl = "http://172.20.10.2:5173/reset-password?token="+resetToken;
         String emailBody = createPasswordResetEmailBody(resetUrl);
 
         emailService.sendHtmlEmail(email, "Password Reset Request", emailBody);
@@ -244,7 +244,7 @@ public class AuthService {
                 "        .header {\n" +
                 "            text-align: center;\n" +
                 "            padding: 10px 0;\n" +
-                "            background-color: #4CAF50;\n" +
+                "            background-color: #FF8C00;\n" +
                 "            color: #ffffff;\n" +
                 "            border-radius: 8px 8px 0 0;\n" +
                 "        }\n" +
