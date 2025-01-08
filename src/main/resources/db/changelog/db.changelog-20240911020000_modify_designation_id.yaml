@@ -1,0 +1,22 @@
+databaseChangeLog:
+  - changeSet:
+      id: 20240911020000_modify_designation_id.yaml
+      author: athiq
+      changes:
+        - dropForeignKeyConstraint:
+            constraintName: fk_user_designation
+            baseTableName: user
+        - modifyDataType:
+            tableName: designation
+            columnName: id
+            newDataType: int
+        - addAutoIncrement:
+            columnName: id
+            tableName: designation
+            columnDataType: int
+        - addForeignKeyConstraint:
+            constraintName: fk_user_designation
+            baseTableName: user
+            baseColumnNames: designation_id
+            referencedTableName: designation
+            referencedColumnNames: id

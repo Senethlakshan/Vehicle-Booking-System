@@ -1,0 +1,33 @@
+databaseChangeLog:
+  - changeSet:
+      id: 20240821202100
+      author: wndilshani
+      changes:
+        - createTable:
+            tableName: saved_post
+            columns:
+              - column:
+                  name: user_id
+                  type: bigint
+                  constraints:
+                    nullable: false
+              - column:
+                  name: post_id
+                  type: bigint
+                  constraints:
+                    nullable: false
+
+        - addForeignKeyConstraint:
+            baseTableName: saved_post
+            baseColumnNames: user_id
+            referencedTableName: user
+            referencedColumnNames: id
+            constraintName: fk_saved_post_user
+
+        - addForeignKeyConstraint:
+            baseTableName: saved_post
+            baseColumnNames: post_id
+            referencedTableName: post
+            referencedColumnNames: id
+            constraintName: fk_saved_post_post
+

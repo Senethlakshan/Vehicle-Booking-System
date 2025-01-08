@@ -1,0 +1,12 @@
+databaseChangeLog:
+  - changeSet:
+      id: 20241218092501_add_fk_user_designation
+      author: athiq
+      changes:
+        - addForeignKeyConstraint:
+            baseTableName: user
+            baseColumnNames: designation_id
+            constraintName: fk_user_designation
+            referencedTableName: designation
+            referencedColumnNames: id
+            onDelete: SET NULL

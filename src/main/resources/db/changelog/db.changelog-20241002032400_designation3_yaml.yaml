@@ -1,0 +1,48 @@
+databaseChangeLog:
+  - changeSet:
+      id: 20240924013001_drop_fk_designation_department
+      author: athiq
+      changes:
+        - dropForeignKeyConstraint:
+            constraintName: fk_designation_department
+            baseTableName: department_designation
+
+  - changeSet:
+      id: 20240924013002_modify_designation_id_type
+      author: athiq
+      changes:
+        - modifyDataType:
+            tableName: designation
+            columnName: id
+            newDataType: int
+
+  - changeSet:
+      id: 20240924013003_add_auto_increment_designation_id
+      author: athiq
+      changes:
+        - addAutoIncrement:
+            columnName: id
+            tableName: designation
+            columnDataType: int
+
+  - changeSet:
+      id: 20240924013004_add_fk_designation_department
+      author: athiq
+      changes:
+        - addForeignKeyConstraint:
+            constraintName: fk_designation_department
+            baseTableName: department_designation
+            baseColumnNames: designation_id
+            referencedTableName: designation
+            referencedColumnNames: id
+
+  - changeSet:
+      id: 20240924013005_add_fk_user_designation
+      author: athiq
+      changes:
+        - addForeignKeyConstraint:
+            constraintName: fk_user_designation
+            baseTableName: user
+            baseColumnNames: designation_id
+            referencedTableName: designation
+            referencedColumnNames: id

@@ -1,0 +1,32 @@
+databaseChangeLog:
+  - changeSet:
+      id: 1
+      author: athiq
+      changes:
+        - dropForeignKeyConstraint:
+            baseTableName: department_designation
+            constraintName: fk_designation_department
+
+  - changeSet:
+      id: 2
+      author: athiq
+      changes:
+        - modifyDataType:
+            tableName: designation
+            columnName: id
+            newDataType: int
+        - addAutoIncrement:
+            columnName: id
+            tableName: designation
+            columnDataType: int
+
+  - changeSet:
+      id: 3
+      author: athiq
+      changes:
+        - addForeignKeyConstraint:
+            baseTableName: department_designation
+            baseColumnNames: designation_id  # Assuming the foreign key column name in department_designation
+            referencedTableName: designation
+            referencedColumnNames: id
+            constraintName: fk_designation_department

@@ -1,0 +1,9 @@
+databaseChangeLog:
+  - changeSet:
+      id: modify_designation_id
+      author: athiq
+      changes:
+        - modifyDataType:
+            tableName: designation
+            columnName: id
+            newDataType: INT AUTO_INCREMENT

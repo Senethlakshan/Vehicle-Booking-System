@@ -1,0 +1,15 @@
+databaseChangeLog:
+  - changeSet:
+      id: 20240825172500_add_column_image_blob_to_event_table
+      author: wndilshani
+      changes:
+        - addColumn:
+            tableName: event
+            columns:
+              - column:
+                  name: image_blob
+                  type: BIGINT
+                  constraints:
+                    nullable: true
+
+

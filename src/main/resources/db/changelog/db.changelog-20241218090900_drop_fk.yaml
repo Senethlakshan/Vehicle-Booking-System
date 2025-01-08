@@ -1,0 +1,9 @@
+databaseChangeLog:
+  - changeSet:
+      id: 20241218090900_drop_fk
+      author: athiq
+      changes:
+        # Drop the foreign key constraint
+        - dropForeignKeyConstraint:
+            baseTableName: department_designation
+            constraintName: fk_designation_department

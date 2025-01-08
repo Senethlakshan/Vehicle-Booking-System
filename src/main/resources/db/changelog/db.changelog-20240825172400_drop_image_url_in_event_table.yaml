@@ -1,0 +1,8 @@
+databaseChangeLog:
+  - changeSet:
+      id: 20240825172400_drop_image_url_in_event_table
+      author: wndilshani
+      changes:
+        - dropColumn:
+            columnName: image_url
+            tableName: event

@@ -1,0 +1,9 @@
+databaseChangeLog:
+  - changeSet:
+      id: 20241218090901_drop_fk_user_designation
+      author: athiq
+      changes:
+        # Drop the foreign key constraint
+        - dropForeignKeyConstraint:
+            baseTableName: user
+            constraintName: fk_user_designation

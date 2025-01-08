@@ -1,4 +1,4 @@
-package athiq.vehicle;
+package com.jxg.isn_backend;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

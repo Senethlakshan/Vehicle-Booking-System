@@ -1,0 +1,10 @@
+databaseChangeLog:
+  - changeSet:
+      id: 20241218091000_auto_fix_designation_id
+      author: athiq
+      changes:
+
+        - addAutoIncrement:
+            columnName: id
+            tableName: designation
+            columnDataType: int

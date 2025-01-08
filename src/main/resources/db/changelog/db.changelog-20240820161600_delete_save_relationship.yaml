@@ -1,0 +1,12 @@
+databaseChangeLog:
+  - changeSet:
+      id: 20240820161600
+      author: wndilshani
+      changes:
+        - dropForeignKeyConstraint:
+            baseTableName: post
+            constraintName: fk_post_saved_by
+
+        - dropColumn:
+            columnName: saved_by
+            tableName: post
