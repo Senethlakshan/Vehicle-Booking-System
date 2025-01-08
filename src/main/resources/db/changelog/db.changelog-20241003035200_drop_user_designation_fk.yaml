@@ -1,8 +1,0 @@
-databaseChangeLog:
-  - changeSet:
-      id: drop_user_designation_fk
-      author: athiq
-      changes:
-        - dropForeignKeyConstraint:
-            baseTableName: user
-            constraintName: fk_user_designation

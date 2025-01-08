@@ -1,8 +1,0 @@
-databaseChangeLog:
-  - changeSet:
-      id: 20240825210700_drop_image_url_in_item_table
-      author: wndilshani
-      changes:
-        - dropColumn:
-            columnName: image_url
-            tableName: item
