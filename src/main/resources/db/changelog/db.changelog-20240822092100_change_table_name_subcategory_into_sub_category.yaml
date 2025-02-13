@@ -1,8 +1,0 @@
-databaseChangeLog:
-  - changeSet:
-      id: 20240822092100_change_table_name_subcategory_into_sub_category
-      author: wndilshani
-      changes:
-        - renameTable:
-            oldTableName: subcategory
-            newTableName: sub_category

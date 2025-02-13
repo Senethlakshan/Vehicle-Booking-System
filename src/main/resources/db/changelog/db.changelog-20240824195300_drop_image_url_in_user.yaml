@@ -1,8 +1,0 @@
-databaseChangeLog:
-  - changeSet:
-      id: 20240824195300
-      author: wndilshani
-      changes:
-        - dropColumn:
-            columnName: image_url
-            tableName: user

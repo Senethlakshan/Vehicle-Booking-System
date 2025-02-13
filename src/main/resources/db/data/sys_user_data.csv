@@ -1,2 +1,0 @@
-id;first_name;last_name;email;password;designation_id;image_url;enabled;role_id;is_activated;otp;is_admin_renewed;password_expire_date;created_by;last_modified_by;created_datetime;last_modified_datetime
-1;SYSTEM_USER;SYS;system.user@jxg.com;no_hash;;;1;1;1;;0;3125-07-30 00:00:00;1;1;;

@@ -1,7 +1,0 @@
-databaseChangeLog:
-  - changeSet:
-      id: 20240903032000_drop_story
-      author: athiq
-      changes:
-        - dropTable:
-            tableName: story
